@@ -3,7 +3,7 @@
     session_start();
 
     if (isset($_SESSION['idlogin']) && isset($_SESSION['email'])) {
-        die(header("Location: home.php"));
+        die(header("Location: test.php"));
     }
 ?>
 

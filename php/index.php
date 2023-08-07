@@ -1,5 +1,6 @@
 <?php 
 
+session_start();
 include "../function.php";
 
 ?>
@@ -23,29 +24,43 @@ include "../function.php";
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../assets/index2.html"><b>Admin</b>LTE</a>
+    <p>Login to Account</p>
   </div>
+
+
+  <?php 
+      if(isset($_SESSION['error'])){
+        echo "
+            <div class='alert alert-danger text-center'>
+              <i class='fas fa-exclamation-triangle'></i> ".$_SESSION['error']."
+                </div>
+                  ";
+  
+                  unset($_SESSION['error']);
+      }
+  
+      if(isset($_SESSION['success'])){
+        echo "
+          <div class='alert alert-success text-center'>
+            <i class='fas fa-check-circle'></i> ".$_SESSION['success']."
+              </div>
+              ";
+  
+              unset($_SESSION['success']);
+      }
+            ?>
+
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in</p>
 
-      <form action="home.php" method="post">
+      <form action="test.php" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email" id="email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
+          <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?php echo(isset($_SESSION['email'])) ? $_SESSION['email'] : ''; unset($_SESSION['email']) ?>">
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="email" id="email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
+          <input type="password" class="form-control" placeholder="Password" name="pass" id="pass" value="<?php echo(isset($_SESSION['pass'])) ? $_SESSION['pass'] : ''; unset($_SESSION['pass']) ?>">
         </div>
         <div class="row">
           <div class="col-4">
@@ -56,7 +71,7 @@ include "../function.php";
 
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="new.php">Create New Account</a>
       </p>
     </div>
   </div>
